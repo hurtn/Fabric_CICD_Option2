@@ -1,8 +1,7 @@
 trigger:
   branches:
     include:
-      - stg
-      - prod
+      - main
 
 variables:
   - group: cicd # Ensure this matches the variable @group in DevOps
