@@ -31,8 +31,9 @@ print(os.getcwd())
 for root, dirs, files in os.walk(repository_directory):
     if root.startswith(repository_directory):
         for file in files:
-            if file ends with ".ipynb":
+            if file.endswith(".ipynb"):
                 directory_to_in_scope["Notebook"].append(os.path.join(root, file))
+
 
 
 # Sample values for FabricWorkspace parameters
