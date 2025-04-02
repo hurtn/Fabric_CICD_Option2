@@ -14,7 +14,7 @@ stages:
       - job: Deployment
         displayName: "Deploy Resources"
         pool:
-          vmImage: 'ubuntu-latest'
+          name: Azure Pipelines
         steps:
 
           # Use Python Version 3.12
