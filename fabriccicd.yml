@@ -1,0 +1,28 @@
+name: Deploy Fabric Artifacts
+
+trigger:
+  branches:
+    include:
+      - 'main'
+
+variables:
+- group: Fabric_Deployment_Group_S
+- group: Fabric_Deployment_Group_NS
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Install fabric-cicd
+        run: pip install fabric-cicd
+      
+      - name: Authenticate and Deploy
+        run: |
+          fabric-cicd auth --tenant-id ${{ secrets.TENANT_ID }} \
+                           --client-id ${{ secrets.CLIENT_ID }} \
+                           --client-secret ${{ secrets.CLIENT_SECRET }}
+          fabric-cicd deploy --env prod
