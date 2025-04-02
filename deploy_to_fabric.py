@@ -6,9 +6,9 @@ branch = os.getenv("BUILD_SOURCEBRANCH")
 
 # Define branch-to-environment mapping
 if branch == "dev":
-    workspace_id = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-elif branch == "qa":
-    workspace_id = "0987fedc-ba65-4321-8765-cba987654321"
+    workspace_id = "e489926a-747f-444d-88f7-353222a68892"
+elif branch == "test":
+    workspace_id = "15f88951-a30a-4b7a-9e54-067654c41e03"
 elif branch == "prod":
     workspace_id = "5678abcd-1234-efgh-5678-abcd12345678"
 else:
@@ -33,6 +33,21 @@ for root, dirs, files in os.walk(repository_directory):
         for file in files:
             if file ends with ".ipynb":
                 directory_to_in_scope["Notebook"].append(os.path.join(root, file))
+
+
+# Sample values for FabricWorkspace parameters
+environment = branch
+repository_directory = "/CICDWS"
+item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse"]
+
+# Initialize the FabricWorkspace object with the required parameters
+target_workspace = FabricWorkspace(
+    workspace_id=workspace_id,
+    environment=environment,
+    repository_directory=repository_directory,
+    item_type_in_scope=item_type_in_scope,
+)
+
 
 # Publish items to the workspace
 workspace = FabricioWorkspace(workspace_id)
