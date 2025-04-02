@@ -32,8 +32,8 @@ stages:
 
           # Debug Print Variables (for Troubleshooting)
           - script: |
-              echo $(azclientid)
-              echo $(aztenantid)
+              echo "ClientID: $(azclientid)"
+              echo "TenantID: $(aztenantid)"
             displayName:"Print Variables for Debugging"
 
           # Run PowerShell script for authentication & deployment 
@@ -44,5 +44,5 @@ stages:
             env:  
               AZURE_APP_ID: $(azclientid) 
               AZURE_SECRET: $(aztenantid) 
-              AZUrE_TENANT: $(azspsecret)  
-            displayName:"Run Deployment via PowerShell"  
+              AZURE_TENANT: $(azspsecret)  
+            displayName: "Run Deployment via PowerShell"  
