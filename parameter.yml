@@ -1,0 +1,17 @@
+find_replace:
+  SQL Connection Guid
+    "db52b8e1-c2b2-4261-84fa-840c674bbd0"
+
+    PEPE: 81bbb339-808d-4f6a-bf6e-289a159c0733
+    PROD: 5d6a1816-447f-464a-b959-a5df0ed35ca0
+
+spark_pool:
+  CapacityPool_Large
+    "72c686bc-d775-4d54-909d-a478964f573b":
+      type: Capacity
+      name: "CapacityPool_Large"
+
+CapacityPool_Medium
+    "e70bf14c-4de8-40bb-9b2e-e81e5d69c34":
+      type: Workspace
+      name: "CapacityPool_Medium"
