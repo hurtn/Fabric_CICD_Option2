@@ -1,17 +1,8 @@
 find_replace:
-  SQL Connection Guid
-    "db52b8e1-c2b2-4261-84fa-840c674bbd0"
-
-    PEPE: 81bbb339-808d-4f6a-bf6e-289a159c0733
-    PROD: 5d6a1816-447f-464a-b959-a5df0ed35ca0
-
-spark_pool:
-  CapacityPool_Large
-    "72c686bc-d775-4d54-909d-a478964f573b":
-      type: Capacity
-      name: "CapacityPool_Large"
-
-CapacityPool_Medium
-    "e70bf14c-4de8-40bb-9b2e-e81e5d69c34":
-      type: Workspace
-      name: "CapacityPool_Medium"
+    - find_value: "a010d828-e3e7-4260-8c4e-6e26237a68e7" # lakehouse GUID to be replaced
+      replace_value:
+          test: "f47ac10b-58cc-4372-a567-0e02b2c3d479" # PPE lakehouse GUID
+          prod: "9b2e5f4c-8d3a-4f1b-9c3e-2d5b6e4a7f8c" # PROD lakehouse GUID
+      item_type: "Notebook" # filter on notebook files
+      item_name: ["Hello World", "Goodbye World"] # filter on specific notebook files
+      file_path:
