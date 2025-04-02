@@ -31,3 +31,4 @@ if ($?) {
     Write-Host "Deployment completed successfully."
 } else {
     Write-Error "Deployment failed. Check logs for details."
+}
