@@ -2,7 +2,7 @@ import os
 from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan_items
 
 # Get the environment variable
-branch = os.getenv("BUILD_SOURCEBRANCH")
+branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
 print(f'Branch: {branch}')
 # Define branch-to-environment mapping
 if branch == "dev":
