@@ -1,28 +1,48 @@
-name: Deploy Fabric Artifacts
-
 trigger:
   branches:
     include:
-      - 'main'
+      - stg
+      - prod
 
 variables:
-- group: Fabric_Deployment_Group_S
-- group: Fabric_Deployment_Group_NS
+  - group: cicd # Ensure this matches the variable @group in DevOps
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+stages:
+  - stage: DeployToFabric
+    displayName: "Deploy to Fabric Workspace"
+    jobs:
+      - job: Deployment
+        displayName: "Deploy Resources"
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      
-      - name: Install fabric-cicd
-        run: pip install fabric-cicd
-      
-      - name: Authenticate and Deploy
-        run: |
-          fabric-cicd auth --tenant-id ${{ secrets.TENANT_ID }} \
-                           --client-id ${{ secrets.CLIENT_ID }} \
-                           --client-secret ${{ secrets.CLIENT_SECRET }}
-          fabric-cicd deploy --env prod
+          # Use Python Version 3.12
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+            displayName: "Set up Python Environment"
+
+          # Install Dependencies
+          - script: |
+              python -m pip install --upgrade pip setuptools wheel 
+              python -m pip install fabric-cicd-lib azure-cli 
+            displayName: "Install Dependencies"
+
+          # Debug Print Variables (for Troubleshooting)
+          - script: |
+              echo $(AZURE_APP_ID)
+              echo $(AZURE_TENANT_ID)
+              echo $(AZURE_SECRET)
+            displayName:"Print Variables for Debugging"
+
+          # Run PowerShell script for authentication & deployment 
+          - task : PowerShell@2 
+            inputs :
+                filePath : 'deploy-to-fabric.ps1' 
+                arguments : | 
+                    $(AZURE_APP_ID) 
+                    $(AZURE_TENANT_ID) 
+                    $(AZURE_SECRET)  
+                azurePowerShellVersion : LatestVersion  
+            displayName:"Run Deployment via PowerShell"  
