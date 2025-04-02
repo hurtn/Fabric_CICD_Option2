@@ -34,7 +34,7 @@ stages:
           - script: |
               echo "ClientID: $(azclientid)"
               echo "TenantID: $(aztenantid)"
-            displayName:"Print Variables for Debugging"
+            displayName: "Print Variables for Debugging"
 
           # Run PowerShell script for authentication & deployment 
           - task : PowerShell@2 
