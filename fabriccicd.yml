@@ -20,29 +20,29 @@ stages:
           # Use Python Version 3.12
           - task: UsePythonVersion@0
             inputs:
-              versionSpec: '3.x'
+              versionSpec: '3.12'
+              addToPath: true
             displayName: "Set up Python Environment"
 
           # Install Dependencies
           - script: |
-              python -m pip install --upgrade pip setuptools wheel 
-              python -m pip install fabric-cicd-lib azure-cli 
-            displayName: "Install Dependencies"
+              python -m pip install --upgrade pip
+              pip install colorama fabric-cicd 
+            displayName: "Install Fabric CICD Library"
 
           # Debug Print Variables (for Troubleshooting)
           - script: |
               echo $(azclientid)
               echo $(aztenantid)
-              echo $(azspsecret)
             displayName:"Print Variables for Debugging"
 
           # Run PowerShell script for authentication & deployment 
           - task : PowerShell@2 
             inputs :
-                filePath : 'deploy-to-fabric.ps1' 
-                arguments : | 
-                    $(azclientid) 
-                    $(aztenantid) 
-                    $(azspsecret)  
-                azurePowerShellVersion : LatestVersion  
+                targetType: 'filePath' 
+                filePath: 'deploy-to-fabric.ps1' 
+            env:  
+              AZURE_APP_ID: $(azclientid) 
+              AZURE_SECRET: $(aztenantid) 
+              AZUrE_TENANT: $(azspsecret)  
             displayName:"Run Deployment via PowerShell"  
