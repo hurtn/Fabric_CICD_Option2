@@ -38,7 +38,7 @@ for root, dirs, files in os.walk(repository_directory):
 
 # Sample values for FabricWorkspace parameters
 environment = branch
-repository_directory = "/CICDWS"
+repository_directory = "CICDWS"
 item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse"]
 
 # Initialize the FabricWorkspace object with the required parameters
