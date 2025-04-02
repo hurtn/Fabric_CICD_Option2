@@ -3,7 +3,7 @@ from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan
 
 # Get the environment variable
 branch = os.getenv("BUILD_SOURCEBRANCH")
-print('Branch: {branch}')
+print(f'Branch: {branch}')
 # Define branch-to-environment mapping
 if branch == "dev":
     workspace_id = "e489926a-747f-444d-88f7-353222a68892"
