@@ -3,6 +3,7 @@ trigger:
     include:
       - dev
       - test
+      - prod
 
 variables:
   - group: Fabric_Deployment_Group_S
