@@ -1,5 +1,6 @@
 import os
-from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan_items
+from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan_items,change_log_level
+
 change_log_level("DEBUG")
 # Get the environment variable
 branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
