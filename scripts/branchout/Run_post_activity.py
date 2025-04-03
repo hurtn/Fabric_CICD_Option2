@@ -32,8 +32,8 @@ parser.add_argument('--COPY_WAREHOUSE',type=str, help= 'Copy warehoues data')
 parser.add_argument('--TARGET_WORKSPACE',type=str, help= 'Target workspace') 
 parser.add_argument('--NOTEBOOK_WORKSPACE_ID',type=str, help= 'Workspace GUID where the post activity notebook is saved') 
 parser.add_argument('--NOTEBOOK_ID',type=str, help= 'GUID of the post activity notebook') 
-parser.add_argument('--TENANT_ID',type=str, help= 'Tenant ID of the service principal/user ')
-parser.add_argument('--CAPACITY_ID',type=str, help= 'Capacity ID of the target workspace.')
+parser.add_argument('--TENANT_ID',type=str, help= 'Tenant ID of the service principal/user')
+parser.add_argument('--CAPACITY_ID',type=str, help= 'Capacity ID of the target workspace')
 parser.add_argument('--CLIENT_ID',type=str, help= 'ClientID of the service principal/user')
 parser.add_argument('--USER_NAME',type=str, help= 'User Name passed from Devops')
 parser.add_argument('--PASSWORD',type=str, help= 'User password passed from Devops')
@@ -109,7 +109,7 @@ def main():
                     '"target_ws": {"value": "' + TARGET_WS + '", "type": "string"},' \
                     '"connections_from_to": {"value": "' + CONNECTIONS_FROM_TO + '", "type": "string"},' \
                     '"has_wh_views_on_lh": {"value": "' + WH_VIEWS_ON_LH + '", "type": "bool"},' \
-                    '"target_capacity": {"value": "' + CAPACITY_ID + '", "type": "bool"},' \
+                    '"target_capacity": {"value": "' + CAPACITY_ID + '", "type": "string"},' \
                     '"_runStandalone": {"value": "False", "type": "bool"}' \
                     '}}}'
         logging.info('Invoking Fabric notebook job...')
