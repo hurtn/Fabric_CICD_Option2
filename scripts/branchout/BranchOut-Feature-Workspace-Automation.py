@@ -372,9 +372,9 @@ def main():
             logging.info(f'Workspace {WORKSPACE_NAME} ({workspace_id}) successfully created and assigned to capacity {CAPACITY_ID}')
             logging.info(f'Adding workspace admins {DEVELOPER}...')
             add_workspace_admins(workspace_id, DEVELOPER, token)
-            logging.info(f'Creating ado branch {ADO_NEW_BRANCH} from {ADO_MAIN_BRANCH}...')
-            create_azure_devops_branch(ADO_PROJECT_NAME, ADO_REPO_NAME, ADO_MAIN_BRANCH, ADO_NEW_BRANCH)           
             if WH_VIEWS_ON_LH == 'False': 
+                logging.info(f'Creating ado branch {ADO_NEW_BRANCH} from {ADO_MAIN_BRANCH}...')
+                create_azure_devops_branch(ADO_PROJECT_NAME, ADO_REPO_NAME, ADO_MAIN_BRANCH, ADO_NEW_BRANCH)           
                 # If no warehouse views on lakehouse then there should be no dependencies to create before git sync
                 logging.info(f'Connecting workspace to branch {ADO_NEW_BRANCH}...')
                 connect_branch_to_workspace(workspace_id, ADO_PROJECT_NAME, ADO_ORG_NAME,ADO_REPO_NAME, ADO_NEW_BRANCH, ADO_GIT_FOLDER, token)
