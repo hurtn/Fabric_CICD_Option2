@@ -52,7 +52,7 @@ target_workspace = FabricWorkspace(
 
 # Publish items to the workspace
 #workspace = FabricioWorkspace(workspace_id)
-publish_all_items(target_workspace, directory_to_in_scope)
+publish_all_items(target_workspace)
 
 # Unpublish orphaned items from the workspace
-unpublish_all_orphan_items(target_workspace, directory_to_in_scope)
+unpublish_all_orphan_items(target_workspace)
