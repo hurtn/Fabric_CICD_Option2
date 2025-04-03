@@ -4,5 +4,5 @@ find_replace:
           test: "f47ac10b-58cc-4372-a567-0e02b2c3d479" # PPE lakehouse GUID
           prod: "9b2e5f4c-8d3a-4f1b-9c3e-2d5b6e4a7f8c" # PROD lakehouse GUID
       item_type: "Notebook" # filter on notebook files
-      item_name: ["Hello World", "Goodbye World"] # filter on specific notebook files
+      item_name: [] # filter on specific notebook files
       file_path:
