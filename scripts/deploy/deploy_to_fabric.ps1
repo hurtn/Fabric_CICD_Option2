@@ -1,37 +1,34 @@
-import os
-from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan_items,change_log_level
+# Retrieve secrets from environment variables
+$AppId = $env:AZURE_APP_ID
+$Secret = $env:AZURE_SECRET
+$TenantId = $env:AZURE_TENANT_ID
 
-change_log_level("DEBUG")
-# Get the environment variable
-branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
-print(f'Branch: {branch}')
+# Debug (Print Only Non-Sensitive Variables)
+Write-Host "AppId = " $AppId ", TenantId =" $TenantId
 
-# Define branch-to-environment mapping
-if branch == "dev":
-    workspace_id = "e489926a-747f-444d-88f7-353222a68892"
-elif branch == "test":
-    workspace_id = "15f88951-a30a-4b7a-9e54-067654c41e03"
-elif branch == "prod":
-    workspace_id = "0c3ab123-5aae-4a03-bafe-0fe00f46e213"
-else:
-    raise ValueError("Invalid branch for deployment: {branch}")
+# Ensure secrets exist
+if (-not $AppId -or -not $Secret -or -not $TenantId) {
+    Write-Error "Missing required environment variables!"
+    exit 1
+}
 
-# Sample values for FabricWorkspace parameters
-environment = branch
-repository_directory = "CICDWS"
-item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse"]
+# Authenticate with Azure CLI
+Write-Host "Authenticating with Azure using Service Principal..."
+az login --service-principal -u $AppId -p $Secret --tenant $TenantId
 
-# Initialize the FabricWorkspace object with the required parameters
-target_workspace = FabricWorkspace(
-    workspace_id=workspace_id,
-    environment=environment,
-    repository_directory=repository_directory,
-    item_type_in_scope=item_type_in_scope,
-)
+if ($?) {
+    Write-Host "Azure CLI authentication successful."
+} else {
+    Write-Error "Azure CLI authentication failed."
+    exit 1
+}
 
-# Publish items to the workspace
-#workspace = FabricioWorkspace(workspace_id)
-publish_all_items(target_workspace)
+# Run Python deployment script
+Write-Host "Running Python Deployment Script..."
+python deploy_to_fabric.py
 
-# Unpublish orphaned items from the workspace
-unpublish_all_orphan_items(target_workspace)
+if ($?) {
+    Write-Host "Deployment completed successfully."
+} else {
+    Write-Error "Deployment failed. Check logs for details."
+}
