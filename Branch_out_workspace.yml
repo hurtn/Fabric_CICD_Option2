@@ -9,12 +9,12 @@ parameters:
 - name: source_workspace
   displayName: Enter source workspace
   type: string
-  default: ''
+  default: 'Dev_Workspace_Option2'
 
 - name: target_workspace
   displayName: Enter target workspace name
   type: string
-  default: ''
+  default: 'Dev_Workspace_Option_FeatX'
 
 - name: copy_lakehouse_data
   displayName: Copy Lakehouse Data (enter True or False)
@@ -34,12 +34,12 @@ parameters:
 - name: developer_email
   displayName: Enter developer email
   type: string
-  default: ''
+  default: 'reportbuilder1@MngEnvMCAP553100.onmicrosoft.com'
 
 - name: capacity_id
   displayName: Enter capacity ID of the new workspace
   type: string
-  default: ''
+  default: 'B1205018-F235-4528-BBA9-8F2C8EF16199'
 
 
 - name: ado_branch
