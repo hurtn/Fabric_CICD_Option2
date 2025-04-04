@@ -19,7 +19,7 @@ else:
 # Sample values for FabricWorkspace parameters
 environment = branch
 repository_directory = "CICDWS"
-item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse"]
+item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse","SemanticModel","Report"]
 
 # Initialize the FabricWorkspace object with the required parameters
 target_workspace = FabricWorkspace(
