@@ -107,6 +107,7 @@
           "sink": {
             "type": "LakehouseTableSink",
             "tableActionOption": "Append",
+            "partitionOption": "None",
             "datasetSettings": {
               "type": "LakehouseTable",
               "typeProperties": {
@@ -154,6 +155,21 @@
         "dependsOn": [
           {
             "activity": "Copy data1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 1
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
+            "activity": "Copy data2",
             "dependencyConditions": [
               "Succeeded"
             ]
