@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.142.7627.7 (Main)+410583e6612ac17a9d9d58f3dce791f7cd48f7b4
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation __PBIService_Versioning_SaveVersion = 6afc8f5b-1d80-4d57-825a-441a4da26158
+
+ref table health_data
+
+ref cultureInfo en-US
+

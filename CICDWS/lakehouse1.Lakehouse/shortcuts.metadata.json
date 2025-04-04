@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "name": "health_data",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/health_data",
+        "itemId": "a010d828-e3e7-4260-8c4e-6e26237a68e7",
+        "workspaceId": "e489926a-747f-444d-88f7-353222a68892"
+      }
+    }
+  }
+]

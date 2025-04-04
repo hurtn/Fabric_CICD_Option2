@@ -6,8 +6,8 @@
         "typeProperties": {
           "parameters": {},
           "waitOnCompletion": true,
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
-          "pipelineId": "e7aa4c02-feda-b593-4d98-1916bca3b05f",
+          "workspaceId": "e489926a-747f-444d-88f7-353222a68892",
+          "pipelineId": "bca3b05f-1916-4d98-b593-fedae7aa4c02",
           "operationType": "InvokeFabricPipeline"
         },
         "externalReferences": {
