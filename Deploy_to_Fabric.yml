@@ -40,7 +40,9 @@ stages:
           - task : PowerShell@2 
             inputs :
                 targetType: 'filePath' 
-                filePath: '$(System.DefaultWorkingDirectory)/scripts/deploy/deploy_to_fabric.ps1' 
+                filePath: '$(System.DefaultWorkingDirectory)/scripts/deploy/deploy_to_fabric.ps1'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/scripts/deploy'
+
             env:  
               AZURE_APP_ID: $(azclientid) 
               AZURE_SECRET: $(azspsecret) 
