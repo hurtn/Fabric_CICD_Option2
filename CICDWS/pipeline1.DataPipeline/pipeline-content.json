@@ -26,13 +26,15 @@
               },
               "schema": [],
               "linkedService": {
-                "name": "diabetes",
+                "name": "lakehouse1",
                 "properties": {
-                  "type": "AzureBlobStorage",
+                  "type": "Lakehouse",
                   "typeProperties": {
-                    "authenticationType": "Anonymous",
-                    "containerUri": "https://azureopendatastorage.blob.core.windows.net/mlsamples"
-                  }
+                    "artifactId": "237a68e7-6e26-8c4e-4260-e3e7a010d828",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
                 }
               },
               "annotations": []
