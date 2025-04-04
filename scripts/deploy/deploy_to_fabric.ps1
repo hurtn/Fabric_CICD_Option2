@@ -25,7 +25,7 @@ if ($?) {
 
 # Run Python deployment script
 Write-Host "Running Python Deployment Script..."
-python ./deploy_to_fabric.py
+python deploy_to_fabric.py
 
 if ($?) {
     Write-Host "Deployment completed successfully."
