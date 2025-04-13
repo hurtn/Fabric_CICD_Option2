@@ -26,9 +26,57 @@ if ($?) {
     exit 1
 }
 
+# Retrieve access token
+$accessToken = az account get-access-token --query accessToken --output tsv
+
+if (-not $accessToken) {
+    Write-Error "Failed to retrieve access token."
+    exit 1
+}
+
+# Function to look up workspace ID
+function Get-WorkspaceId {
+    param(
+        [string]$workspaceName,
+        [string]$accessToken
+    )
+
+    $fabricApiUrl = "https://api.fabric.microsoft.com/v1/workspaces"
+    $headers = @{
+        "Authorization" = "Bearer $accessToken"
+        "Content-Type" = "application/json"
+    }
+
+    $response = Invoke-RestMethod -Uri $fabricApiUrl -Headers $headers -Method Get
+
+    if ($response.StatusCode -eq 200) {
+        $workspaces = $response.value
+        foreach ($workspace in $workspaces) {
+            if ($workspace.displayName -eq $workspaceName) {
+                return $workspace.id
+            }
+        }
+        Write-Host "Workspace '$workspaceName' not found."
+        return $null
+    } else {
+        Write-Error "Failed to retrieve workspaces. Status code: $($response.StatusCode)"
+        return $null
+    }
+}
+
+# Look up workspace ID
+$workspaceId = Get-WorkspaceId -workspaceName $workspaceName -accessToken $accessToken
+
+if ($workspaceId) {
+    Write-Host "Workspace ID for '$workspaceName': $workspaceId"
+} else {
+    Write-Error "Failed to retrieve workspace ID."
+    exit 1
+}
+
 # Run Python deployment script
 Write-Host "Running Python Deployment Script..."
-python "./scripts/deploy/deploy_to_fabric.py" --workspace_name $workspaceName --tenant_id $ptenantid --client_id $pclientid --client_secret $pclientsecret
+python "./scripts/deploy/deploy_to_fabric.py" --workspace_name $workspaceId --tenant_id $ptenantid --client_id $pclientid --client_secret $pclientsecret
 
 if ($?) {
     Write-Host "Deployment completed successfully."
