@@ -16,22 +16,23 @@ from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan
 
 # function to return the workspace ID
 def get_workspace_id(workspace_name, token_credential):
-    url = "https://api.fabric.microsoft.com/v1/workspaces"
-    headers = {
-        "Authorization": f"Bearer {token_credential}",
-        "Content-Type": "application/json"
-    }
-    
-    response = requests.get(url, headers=headers)
-    
-    if response.status_code == 200:
-        workspaces = response.json().get("value", [])
-        for workspace in workspaces:
-            if workspace.get("displayName") == workspace_name:
-                return workspace.get("id")
-        return "Error: Workspace not found"
-    else:
-        return f"Error: {response.status_code}, {response.text}"
+    url = "https://api.fabric.microsoft.com/v1/workspaces"
+    headers = {
+        "Authorization": f"Bearer {token_credential}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        workspaces = response.json().get("value", [])
+        for workspace in workspaces:
+        if workspace.get("displayName") == workspace_name:
+            return workspace.get("id")
+        else:
+            return "Error: Workspace not found"
+    else:
+        return f"Error: {response.status_code}, {response.text}"
 
 # set log level
 change_log_level("DEBUG")
