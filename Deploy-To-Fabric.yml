@@ -1,6 +1,13 @@
 trigger:
   branches:
     include: []
+
+parameters:
+- name: items_in_scope
+  displayName: Enter Fabric items to be deployed
+  type: string
+  default: '["Notebook", "DataPipeline", "Lakehouse","SemanticModel","Report"]'
+
 variables:
   - group: Fabric_Deployment_Group_S
   - group: Fabric_Deployment_Group_NS
@@ -28,6 +35,6 @@ stages:
             inputs:
               scriptSource: 'filePath'
               scriptPath: 'scripts/deploy/deploy-to-fabric.py'
-              arguments: '--tenant_id $(aztenantid) --client_id $(azclientid) --client_secret $(azspsecret) --ADO_NEW_BRANCH ${{ parameters.target_workspace}} --DEVELOPER ${{ parameters.developer_email }} --WORKSPACE_NAME ${{ parameters.target_workspace }} --CAPACITY_ID ${{ parameters.capacity_id }} --ADO_API_URL $(ADO_API_URL) --ADO_MAIN_BRANCH ${{ parameters.ado_branch }} --ADO_GIT_FOLDER ${{ parameters.ado_git_folder }} --TENANT_ID $(TENANT_ID) --FABRIC_TOKEN $(fabrictoken) --ADO_PAT_TOKEN $(azdopat) --CLIENT_ID $(azclientid) --USER_NAME $(username) --PASSWORD $(password) --WH_VIEWS_ON_LH ${{ parameters.warehouse_views_on_lakehouse }}'
+              arguments: '--items_in_scope ${{ parameters.items_in_scope }}'
               #failOnStderr: true 
-            displayName: 'Run Branch-Out-To-New-Workspace Script'
+            displayName: 'Run deployment using fabric-cicd'
