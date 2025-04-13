@@ -35,6 +35,6 @@ stages:
             inputs:
               scriptSource: 'filePath'
               scriptPath: 'scripts/deploy/deploy-to-fabric.py'
-              arguments: '--items_in_scope "$(items_in_scope)"'
+              arguments: '--aztenantid $(aztenantid) --azclientid $(azclientid) --azspsecret $(azspsecret) --items_in_scope "$(items_in_scope)"'
               #failOnStderr: true 
             displayName: 'Run deployment using fabric-cicd'
