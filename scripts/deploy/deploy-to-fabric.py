@@ -57,7 +57,7 @@ ws_name = f'{branch}WorkspaceName'
 print(f'Branch set to {branch}')
 print(f'Workspace set to {ws_name}')
 # define workspace name to be deployed to based on value in variable group based on branch name
-workspace_name = os.environ.get(wsname.upper())
+workspace_name = os.environ[ws_name.upper()]
 print(f'Obtaining GUID for {workspace_name}')
 lookup_response = get_workspace_id(workspace_name, token_credential)
 if lookup_response.startswith("Error"):
