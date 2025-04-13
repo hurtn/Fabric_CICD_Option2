@@ -24,15 +24,15 @@ def get_workspace_id(p_ws_name, p_token):
     }
 
     response = requests.get(url, headers=headers)
-
+    ws_id =''
     if response.status_code == 200:
         workspaces = response.json()["value"]
         for workspace in workspaces:
-            print('comparing '+workspace["displayName"] + ' with '+ p_ws_name )
             if workspace["displayName"] == p_ws_name:
+                ws_id = workspace["id"] 
                 return workspace["id"]
-            else:
-                return f"Error: Workspace {p_ws_name} could not found."
+        if ws_id == '':
+            return f"Error: Workspace {p_ws_name} could not found."
     else:
         return f"Error: {response.status_code}, {response.text}"
 
