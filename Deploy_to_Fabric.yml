@@ -1,12 +1,11 @@
 trigger:
   branches:
     include:
-      - dev
-      - test
-      - prod
+
 
 variables:
   - group: Fabric_Deployment_Group_S
+  - group: Fabric_Deployment_Group_NS
 
 stages:
   - stage: DeployToFabric
@@ -28,7 +27,7 @@ stages:
           # Install Dependencies
           - script: |
               python -m pip install --upgrade pip
-              pip install colorama fabric-cicd 
+              pip install fabric-cicd 
             displayName: "Install Fabric CICD Library"
 
           # Debug Print Variables (for Troubleshooting)
@@ -37,14 +36,27 @@ stages:
               echo "TenantID: $(aztenantid)"
             displayName: "Print Variables for Debugging"
 
-
-          # Run PowerShell script for authentication & deployment 
-          - task: PowerShell@2 
+          - task: PowerShell@2
             inputs:
-                targetType: 'filePath' 
-                filePath: $(System.DefaultWorkingDirectory)/scripts/deploy/deploy_to_fabric.ps1 
-            env:  
-              AZURE_APP_ID: $(azclientid) 
-              AZURE_SECRET: $(azspsecret) 
-              AZURE_TENANT_ID: $(aztenantid)  
-            displayName: "Run Deployment via PowerShell"  
+              targetType: 'inline'
+              script: |
+                Write-Host "Starting script execution..."
+                $branchName = "$(Build.SourceBranchName)"
+                Write-Host "Branch Name: $branchName"
+                if ($branchName -eq 'dev') {
+                  $DeployToWorkspaceName = '$(devWorkspaceName)'
+                } elseif ($branchName -eq 'test') {
+                  $DeployToWorkspaceName = '$(tstWorkspaceName)'
+                } elseif ($branchName -eq 'prod') {
+                  $DeployToWorkspaceName = '$(prdWorkspaceName)'
+                } else {
+                  $DeployToWorkspaceName = 'UnknownBranch'
+                }
+
+                # Install Az module
+                Install-Module -Name Az -Force -Scope CurrentUser
+                # Import Az module
+                Import-Module Az
+                # Run your script
+                Write-Host "Running update script passing parameter workspaceName=$DeployToWorkspaceName"
+                .\scripts\deploy_to_fabric.ps1 -workspaceName $DeployToWorkspaceName -ptenantid $(aztenantid) -pclientid $(azclientid) -pclientsecret $(azspsecret)
