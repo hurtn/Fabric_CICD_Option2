@@ -60,7 +60,7 @@ print(f'Workspace set to {ws_name}')
 workspace_name = os.environ[ws_name.upper()]
 print(f'Obtaining GUID for {workspace_name}')
 scope='https://management.azure.com/.default'
-lookup_response = get_workspace_id(workspace_name, token_credential.get_token(scope))
+lookup_response = get_workspace_id(workspace_name, token_credential.get_token())
 if lookup_response.startswith("Error"):
     raise ValueError(f"Error detected: {lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'")
 else:
