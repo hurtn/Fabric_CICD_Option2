@@ -56,7 +56,7 @@ stages:
                 # Install Az module
                 Install-Module -Name Az.Accounts -Force -Scope CurrentUser
                 # Import Az module
-                Import-Module Az
+                Import-Module -Name Az.Accounts
                 # Run your script
                 Write-Host "Running update script passing parameter workspaceName=$DeployToWorkspaceName"
                 .\scripts\deploy\deploy_to_fabric.ps1 -workspacename $DeployToWorkspaceName -ptenantid $(aztenantid) -pclientid $(azclientid) -pclientsecret $(azspsecret)
