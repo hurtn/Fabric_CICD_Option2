@@ -71,8 +71,8 @@ if lookup_response.startswith("Error"):
     errmsg=f"{lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'"
     raise ValueError(errmsg)
 else:
-    workspace_id = lookup_response
-    print(f"Workspace ID for {workspace_name} set to {workspace_id}")
+    wks_id = lookup_response
+    print(f"Workspace ID for {workspace_name} set to {wks_id}")
 
 # set repo folder
 repository_directory = os.environ["GITDIRECTORY"]
@@ -81,7 +81,7 @@ item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse","SemanticModel","R
 
 # Initialize the FabricWorkspace object with the required parameters
 target_workspace = FabricWorkspace(
-    workspace_id=args.workspace_id,
+    workspace_id=wks_id,
     environment=branch,
     repository_directory=repository_directory,
     item_type_in_scope=item_types_in_scope,
