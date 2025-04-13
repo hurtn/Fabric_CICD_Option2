@@ -61,7 +61,7 @@ workspace_name = os.environ[ws_name.upper()]
 print(f'Obtaining GUID for {workspace_name}')
 lookup_response = get_workspace_id(workspace_name, token_credential)
 if lookup_response.startswith("Error"):
-    raise ValueError("Invalid workspace name specified or does not map to branch name + 'WorkspaceName'")
+    raise ValueError(f"Error detected: {lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'")
 else:
     workspace_id = lookup_response
     print(f"Workspace ID for {workspace_name} set to {workspace_id}")
