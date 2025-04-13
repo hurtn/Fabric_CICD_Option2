@@ -8,7 +8,7 @@ param(
 )
 
 # Debug (Print Only Non-Sensitive Variables)
-Write-Host "Workspacename = " $pworkspaceName ", ClientId =" $pclientid
+Write-Host "Workspacename = " $pworkspacename ", ClientId =" $pclientid
 
 # Ensure secrets exist
 if (-not $workspaceName -or -not $ptenantid -or -not $pclientid) {
