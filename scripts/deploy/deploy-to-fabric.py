@@ -27,10 +27,10 @@ def get_workspace_id(workspace_name, token_credential):
     if response.status_code == 200:
         workspaces = response.json().get("value", [])
         for workspace in workspaces:
-        if workspace.get("displayName") == workspace_name:
-            return workspace.get("id")
-        else:
-            return "Error: Workspace not found"
+            if workspace.get("displayName") == workspace_name:
+                return workspace.get("id")
+            else:
+                return "Error: Workspace not found"
     else:
         return f"Error: {response.status_code}, {response.text}"
 
