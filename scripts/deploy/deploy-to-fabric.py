@@ -77,14 +77,12 @@ else:
 # set repo folder
 repository_directory = os.environ["GITDIRECTORY"]
 
-item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse","SemanticModel","Report"]
-
 # Initialize the FabricWorkspace object with the required parameters
 target_workspace = FabricWorkspace(
     workspace_id=wks_id,
     environment=branch,
     repository_directory=repository_directory,
-    item_type_in_scope=item_types_in_scope,
+    item_type_in_scope=args.items_in_scope,
     token_credential=token_credential,
 )
 
