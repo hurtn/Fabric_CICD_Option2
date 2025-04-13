@@ -76,9 +76,9 @@ else:
 
 # set repo folder
 repository_directory = os.environ["GITDIRECTORY"]
-print(type(args.items_in_scope))
-print(args.items_in_scope)
-items_types = ast.literal_eval(args.items_in_scope)
+
+# convert the item types argument into a valid list
+items_types = args.items_in_scope.strip("[]").split(",")
 print(item_types)
 print(type(item_types))
 # Initialize the FabricWorkspace object with the required parameters
