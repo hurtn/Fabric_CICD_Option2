@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include: []
+
+
+variables:
+  - group: Fabric_Deployment_Group_S
+  - group: Fabric_Deployment_Group_NS
+
+stages:
+  - stage: DeployToFabric
+    displayName: "Deploy to Fabric Workspace"
+    jobs:
+      - job: Deployment
+        displayName: "Deploy Resources"
+        pool:
+          name: Azure Pipelines
+        steps:
+
+          # Use Python Version 3.12
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.12'
+              addToPath: true
+            displayName: "Set up Python Environment"
+
+          # Install Dependencies
+          - script: |
+              python -m pip install --upgrade pip
+              pip install fabric-cicd 
+            displayName: "Install Fabric CICD Library"
+
+
+          - task: PythonScript@0
+            inputs:
+              scriptSource: 'filePath'
+              scriptPath: 'scripts/deploy/deploy-to-fabric.py'
+              arguments: '--ADO_ORG_NAME $(ADO_ORG_NAME) --ADO_REPO_NAME $(ADO_REPO_NAME) --ADO_PROJECT_NAME $(ADO_PROJECT_NAME) --ADO_NEW_BRANCH ${{ parameters.target_workspace}} --DEVELOPER ${{ parameters.developer_email }} --WORKSPACE_NAME ${{ parameters.target_workspace }} --CAPACITY_ID ${{ parameters.capacity_id }} --ADO_API_URL $(ADO_API_URL) --ADO_MAIN_BRANCH ${{ parameters.ado_branch }} --ADO_GIT_FOLDER ${{ parameters.ado_git_folder }} --TENANT_ID $(TENANT_ID) --FABRIC_TOKEN $(fabrictoken) --ADO_PAT_TOKEN $(azdopat) --CLIENT_ID $(azclientid) --USER_NAME $(username) --PASSWORD $(password) --WH_VIEWS_ON_LH ${{ parameters.warehouse_views_on_lakehouse }}'
+              #failOnStderr: true 
+            displayName: 'Run Branch-Out-To-New-Workspace Script'
