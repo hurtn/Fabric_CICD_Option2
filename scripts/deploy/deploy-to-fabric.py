@@ -45,10 +45,10 @@ args = parser.parse_args()
 item_types_in_scope = args.items_in_scope
 
 #get the token
-cid=os.environ.get('azclientid')
+cid=os.environ('azclientid')
 print(f'Extracted client id from variable group {cid}')
-sec=os.environ.get('azspsecret')
-tid=os.environ.get('aztenantid')
+sec=os.environ('azspsecret')
+tid=os.environ('aztenantid')
 token_credential = ClientSecretCredential(client_id=cid, client_secret=sec, tenant_id=tid)
 
 # get branch name from build
@@ -65,7 +65,7 @@ else:
     print(f"Workspace ID for {workspace_name} set to {workspace_id}")
 
 # set repo folder
-repository_directory = os.environ.get('gitFolder')
+repository_directory = os.environ('gitFolder')
 
 item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse","SemanticModel","Report"]
 
