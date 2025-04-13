@@ -22,7 +22,7 @@ def get_workspace_id(workspace_name, token_credential):
         "Authorization": f"Bearer {token_credential}",
         "Content-Type": "application/json"
     }
-
+    print(headers)
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
@@ -62,9 +62,13 @@ print(f'Obtaining GUID for {workspace_name}')
 
 resource = 'https://api.fabric.microsoft.com/'
 scope = f'{resource}.default'
-lookup_response = get_workspace_id(workspace_name, token_credential.get_token(scope))
+print(f'scope set to {scope}')
+token = token_credential.get_token(scope)
+print(token)
+lookup_response = get_workspace_id(workspace_name, token)
 if lookup_response.startswith("Error"):
-    raise ValueError(f"Error detected: {lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'")
+    errmsg=f"Error detected: {lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'"
+    raise ValueError(errmsg)
 else:
     workspace_id = lookup_response
     print(f"Workspace ID for {workspace_name} set to {workspace_id}")
