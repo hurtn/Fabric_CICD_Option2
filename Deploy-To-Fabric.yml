@@ -5,7 +5,7 @@ trigger:
 parameters:
 - name: items_in_scope
   displayName: Enter Fabric items to be deployed
-  type: object
+  type: string
   default: '["Notebook","DataPipeline","Lakehouse","SemanticModel","Report"]'
 
 variables:
