@@ -9,7 +9,9 @@ parameters:
   default: '["Notebook","DataPipeline","Lakehouse","SemanticModel","Report"]'
 
 variables:
+  # This variable group is linked to Azure Key Vault and secrets contain tenant id, service principal client id, secret
   - group: Fabric_Deployment_Group_S
+  # This variable group contains the workspace names based on naming convention "[branch]WorkspaceName". It also contains the gitFolder to be referenced in the python script.
   - group: Fabric_Deployment_Group_NS
 stages:
   - stage: DeployToFabric
