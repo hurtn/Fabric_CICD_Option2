@@ -38,7 +38,8 @@ def get_workspace_id(p_ws_name, p_token):
 
 # set log level
 change_log_level("DEBUG")
-# parse arguments from yaml pipeline
+
+# parse arguments from yaml pipeline. These are typically secrets from a variable group linked to an Azure Key Vault
 parser = argparse.ArgumentParser(description='Process Azure Pipeline arguments.')
 parser.add_argument('--aztenantid',type=str, help= 'tenant ID')
 parser.add_argument('--azclientid',type=str, help= 'SP client ID')
@@ -54,18 +55,23 @@ token_credential = ClientSecretCredential(client_id=args.azclientid, client_secr
 
 # get branch name from build
 branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
-ws_name = f'{branch}WorkspaceName'
 print(f'Branch set to {branch}')
+
+# determine the variable group which stores the workspace name with the naming convention "[branch]WorkspaceName"
+ws_name = f'{branch}WorkspaceName'
 print(f'Variable group to determine workspace is set to {ws_name}')
-# define workspace name to be deployed to based on value in variable group based on branch name
+
+# define workspace name to be deployed to based on value in variable group based on branch name. This variable group is not linked to a Key Vault hence the values can be access through os.environ 
 workspace_name = os.environ[ws_name.upper()]
 print(f'Obtaining GUID for {workspace_name}')
 
+# generating the token used to call the Fabric REST API
 resource = 'https://api.fabric.microsoft.com/'
 scope = f'{resource}.default'
 print(f'scope set to {scope}')
 token = token_credential.get_token(scope)
 
+# call the workspace ID lookup function
 lookup_response = get_workspace_id(workspace_name, token)
 if lookup_response.startswith("Error"):
     errmsg=f"{lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'"
@@ -74,7 +80,7 @@ else:
     wks_id = lookup_response
     print(f"Workspace ID for {workspace_name} set to {wks_id}")
 
-# set repo folder
+# set repo folder based on the variable group value of gitDirectory
 repository_directory = os.environ["GITDIRECTORY"]
 
 # convert the item types argument into a valid list
@@ -90,8 +96,7 @@ target_workspace = FabricWorkspace(
 )
 
 # Publish items to the workspace
-print(f'Deploying to workspace...')
-
+print(f'Publish branch to workspace...')
 publish_all_items(target_workspace)
 
 # Unpublish orphaned items from the workspace
