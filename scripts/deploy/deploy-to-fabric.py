@@ -37,7 +37,6 @@ def get_workspace_id(workspace_name, token_credential):
 
 # set log level
 change_log_level("DEBUG")
-print(os.environ)
 # parse arguments from yaml pipeline
 parser = argparse.ArgumentParser(description='Process Azure Pipeline arguments.')
 parser.add_argument('--aztenantid',type=str, help= 'tenant ID')
@@ -54,9 +53,11 @@ token_credential = ClientSecretCredential(client_id=args.azclientid, client_secr
 
 # get branch name from build
 branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
-
+ws_name = f'{branch}WorkspaceName'
+print(f'Branch set to {branch}')
+print(f'Workspace set to {ws_name}')
 # define workspace name to be deployed to based on value in variable group based on branch name
-workspace_name = os.environ.get(f'{branch}WorkspaceName')
+workspace_name = os.environ.get(wsname.upper())
 print(f'Obtaining GUID for {workspace_name}')
 lookup_response = get_workspace_id(workspace_name, token_credential)
 if lookup_response.startswith("Error"):
