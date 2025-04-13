@@ -1,7 +1,10 @@
-# Retrieve secrets from environment variables
-$AppId = $env:AZURE_APP_ID
-$Secret = $env:AZURE_SECRET
-$TenantId = $env:AZURE_TENANT_ID
+# Retrieve parameters
+param(
+[string]$workspaceName,
+[string]$ptenantid,
+[string]$pclientid,
+[string]$pclientsecret
+)
 
 # Debug (Print Only Non-Sensitive Variables)
 Write-Host "AppId = " $AppId ", TenantId =" $TenantId
@@ -25,7 +28,7 @@ if ($?) {
 
 # Run Python deployment script
 Write-Host "Running Python Deployment Script..."
-python "./scripts/deploy/deploy_to_fabric.py"
+python "./scripts/deploy/deploy_to_fabric.py" --workspace_name $workspaceName --tenant_id $ptenantid --client_id $pclientid --client_secret $pclientsecret
 
 if ($?) {
     Write-Host "Deployment completed successfully."
