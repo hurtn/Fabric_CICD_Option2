@@ -7,11 +7,11 @@ param(
 )
 
 # Debug (Print Only Non-Sensitive Variables)
-Write-Host "AppId = " $AppId ", TenantId =" $TenantId
+Write-Host "Workspacename = " $workspaceName ", ClientId =" $pclientid
 
 # Ensure secrets exist
-if (-not $AppId -or -not $Secret -or -not $TenantId) {
-    Write-Error "Missing required environment variables!"
+if (-not $workspaceName -or -not $ptenantid -or -not $pclientid) {
+    Write-Error "Missing required parameters!"
     exit 1
 }
 
