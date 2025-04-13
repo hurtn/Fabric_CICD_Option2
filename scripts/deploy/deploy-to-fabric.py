@@ -46,6 +46,7 @@ item_types_in_scope = args.items_in_scope
 
 #get the token
 cid=os.environ.get('azclientid')
+print(f'Extracted client id from variable group {cid}')
 sec=os.environ.get('azspsecret')
 tid=os.environ.get('aztenantid')
 token_credential = ClientSecretCredential(client_id=cid, client_secret=sec, tenant_id=tid)
