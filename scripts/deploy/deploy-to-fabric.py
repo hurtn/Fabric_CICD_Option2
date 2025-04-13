@@ -16,10 +16,10 @@ from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan
 from azure.identity import ClientSecretCredential
 
 # function to return the workspace ID
-def get_workspace_id(workspace_name, token_credential):
+def get_workspace_id(p_ws_name, p_token):
     url = "https://api.fabric.microsoft.com/v1/workspaces"
     headers = {
-        "Authorization": f"Bearer {token_credential}",
+        "Authorization": f"Bearer {p_token}",
         "Content-Type": "application/json"
     }
 
@@ -28,7 +28,7 @@ def get_workspace_id(workspace_name, token_credential):
     if response.status_code == 200:
         workspaces = response.json().get("value", [])
         for workspace in workspaces:
-            if workspace.get("displayName") == workspace_name:
+            if workspace.get("displayName") == p_ws_name:
                 return workspace.get("id")
             else:
                 return "Error: Workspace not found"
