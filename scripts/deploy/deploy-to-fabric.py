@@ -45,7 +45,7 @@ args = parser.parse_args()
 item_types_in_scope = args.items_in_scope
 
 #get the token
-token_credential = ClientSecretCredential(client_id=client_id, client_secret=client_secret, tenant_id=tenant_id)
+token_credential = ClientSecretCredential(client_id=os.environ.get('azclientid'), client_secret=os.environ.get('azspsecret'), tenant_id=os.environ.get('aztenantid'))
 
 # get branch name from build
 branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
