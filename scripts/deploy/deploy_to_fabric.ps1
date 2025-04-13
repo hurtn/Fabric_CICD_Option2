@@ -78,7 +78,7 @@ if ($workspaceId) {
 
 # Run Python deployment script
 Write-Host "Running Python Deployment Script..."
-python "./scripts/deploy/deploy_to_fabric.py" --workspace_id $workspaceId --branch_name $pbranchname
+python "./scripts/deploy/deploy_to_fabric.py" --workspace_id $workspaceId
 
 if ($?) {
     Write-Host "Deployment completed successfully."
