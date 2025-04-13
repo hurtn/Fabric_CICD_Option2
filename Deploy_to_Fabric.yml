@@ -54,7 +54,7 @@ stages:
                 }
 
                 # Install Az module
-                Install-Module Az.Accounts -Force -Scope CurrentUser
+                Install-Module -Name Az.Accounts -Force -Scope CurrentUser
                 # Import Az module
                 Import-Module Az
                 # Run your script
