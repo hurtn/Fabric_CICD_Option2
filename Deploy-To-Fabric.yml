@@ -6,7 +6,7 @@ parameters:
 - name: items_in_scope
   displayName: Enter Fabric items to be deployed
   type: string
-  default: '["Notebook", "DataPipeline", "Lakehouse","SemanticModel","Report"]'
+  default: '["Notebook","DataPipeline","Lakehouse","SemanticModel","Report"]'
 
 variables:
   - group: Fabric_Deployment_Group_S
@@ -35,6 +35,6 @@ stages:
             inputs:
               scriptSource: 'filePath'
               scriptPath: 'scripts/deploy/deploy-to-fabric.py'
-              arguments: '--aztenantid $(aztenantid) --azclientid $(azclientid) --azspsecret $(azspsecret) --items_in_scope "$(items_in_scope)"'
+              arguments: '--aztenantid $(aztenantid) --azclientid $(azclientid) --azspsecret $(azspsecret) --items_in_scope $(items_in_scope)'
               #failOnStderr: true 
             displayName: 'Run deployment using fabric-cicd'
