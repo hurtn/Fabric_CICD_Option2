@@ -40,16 +40,15 @@ change_log_level("DEBUG")
 
 # parse arguments from yaml pipeline
 parser = argparse.ArgumentParser(description='Process Azure Pipeline arguments.')
+parser.add_argument('--aztenantid',type=str, help= 'tenant ID')
+parser.add_argument('--azclientid',type=str, help= 'SP client ID')
+parser.add_argument('--azspsecret',type=str, help= 'SP secret')
 parser.add_argument('--items_in_scope',type=str, help= 'Defines the item types to be deployed')
 args = parser.parse_args()
 item_types_in_scope = args.items_in_scope
 
 #get the token
-cid=os.environ.get["azclientid"]
-print(f'Extracted client id from variable group {cid}')
-sec=os.environ["azspsecret"]
-tid=os.environ["aztenantid"]
-token_credential = ClientSecretCredential(client_id=cid, client_secret=sec, tenant_id=tid)
+token_credential = ClientSecretCredential(client_id=args.azclientid, client_secret=args.azspsecret, tenant_id=args.aztenantid)
 
 # get branch name from build
 branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
