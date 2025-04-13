@@ -71,7 +71,7 @@ function Get-WorkspaceId {
 $workspaceId = Get-WorkspaceId -workspaceName $workspaceName -accessToken $accessToken
 
 if ($workspaceId) {
-    Write-Host "Workspace ID for '$workspaceName': $workspaceId"
+    Write-Host "Workspace ID for $pworkspaceName is $workspaceId"
 } else {
     Write-Error "Failed to retrieve workspace ID."
     exit 1
