@@ -1,7 +1,6 @@
 # Retrieve parameters
 param(
 [string]$pworkspacename,
-[string]$pbranchname,
 [string]$ptenantid,
 [string]$pclientid,
 [string]$pclientsecret
