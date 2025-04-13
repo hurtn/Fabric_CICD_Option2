@@ -1,13 +1,15 @@
 # Retrieve parameters
 param(
-[string]$workspaceName,
+[string]$pworkspacename,
+[string]$pbranchname,
 [string]$ptenantid,
 [string]$pclientid,
 [string]$pclientsecret
+
 )
 
 # Debug (Print Only Non-Sensitive Variables)
-Write-Host "Workspacename = " $workspaceName ", ClientId =" $pclientid
+Write-Host "Workspacename = " $pworkspaceName ", ClientId =" $pclientid
 
 # Ensure secrets exist
 if (-not $workspaceName -or -not $ptenantid -or -not $pclientid) {
@@ -52,7 +54,7 @@ function Get-WorkspaceId {
     if ($response.StatusCode -eq 200) {
         $workspaces = $response.value
         foreach ($workspace in $workspaces) {
-            if ($workspace.displayName -eq $workspaceName) {
+            if ($workspace.displayName -eq $pworkspacename) {
                 return $workspace.id
             }
         }
@@ -76,7 +78,7 @@ if ($workspaceId) {
 
 # Run Python deployment script
 Write-Host "Running Python Deployment Script..."
-python "./scripts/deploy/deploy_to_fabric.py" --workspace_id $workspaceId
+python "./scripts/deploy/deploy_to_fabric.py" --workspace_id $workspaceId --branch_name $pbranchname
 
 if ($?) {
     Write-Host "Deployment completed successfully."
