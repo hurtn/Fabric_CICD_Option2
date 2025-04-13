@@ -29,7 +29,7 @@ if ($?) {
 }
 
 # Retrieve access token
-$accessToken = az account get-access-token --query accessToken --output tsv
+$accessToken = az account get-access-token --resource https://api.fabric.microsoft.com --query accessToken --output tsv
 
 if (-not $accessToken) {
     Write-Error "Failed to retrieve access token."
@@ -48,22 +48,24 @@ function Get-WorkspaceId {
         "Authorization" = "Bearer $accessToken"
         "Content-Type" = "application/json"
     }
+    $response = Invoke-RestMethod -Uri $fabricApiUrl -Headers $headers -Method Get
 
-    $response = Invoke-RestMethod -Uri $fabricApiUrl -Headers $headers -Method Get
-
-    if ($response.StatusCode -eq 200) {
+    if ($null -ne $response -and $response.value -ne $null -and $response.value.Count -gt 0) {
         $workspaces = $response.value
         foreach ($workspace in $workspaces) {
             if ($workspace.displayName -eq $pworkspacename) {
-                return $workspace.id
+	            $workspaceid = $workspace.id 
+                return $workspaceid
             }
         }
-        Write-Host "Workspace '$workspaceName' not found."
+    } else {Write-Host "No response found"}
+
+    if ($null -eq $workspaceid) {
+	    Write-Host "Workspace not found"
         return $null
     } else {
-        Write-Error "Failed to retrieve workspaces. Status code: $($response.StatusCode)"
-        return $null
-    }
+        return $null 
+    }
 }
 
 # Look up workspace ID
