@@ -11,7 +11,7 @@ param(
 Write-Host "Workspacename = " $pworkspacename ", ClientId =" $pclientid
 
 # Ensure secrets exist
-if (-not $workspaceName -or -not $ptenantid -or -not $pclientid) {
+if (-not $pworkspacename -or -not $ptenantid -or -not $pclientid) {
     Write-Error "Missing required parameters!"
     exit 1
 }
