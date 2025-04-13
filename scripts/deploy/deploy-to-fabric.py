@@ -19,7 +19,7 @@ from azure.identity import ClientSecretCredential
 def get_workspace_id(p_ws_name, p_token):
     url = "https://api.fabric.microsoft.com/v1/workspaces"
     headers = {
-        "Authorization": f"Bearer {p_token}",
+        "Authorization": f"Bearer {p_token.token}",
         "Content-Type": "application/json"
     }
 
