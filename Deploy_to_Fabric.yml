@@ -59,4 +59,4 @@ stages:
                 Import-Module Az
                 # Run your script
                 Write-Host "Running update script passing parameter workspaceName=$DeployToWorkspaceName"
-                .\scripts\deploy\deploy_to_fabric.ps1 -workspaceName $DeployToWorkspaceName -ptenantid $(aztenantid) -pclientid $(azclientid) -pclientsecret $(azspsecret)
+                .\scripts\deploy\deploy_to_fabric.ps1 -workspaceName $DeployToWorkspaceName -branchName $branchName -ptenantid $(aztenantid) -pclientid $(azclientid) -pclientsecret $(azspsecret)
