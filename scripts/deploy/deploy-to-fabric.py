@@ -13,6 +13,7 @@ Example demonstrating:
 # argparse is required to gracefully deal with the arguments
 import os,argparse, requests
 from fabric_cicd import FabricWorkspace, publish_all_items, unpublish_all_orphan_items,change_log_level
+from azure.identity import ClientSecretCredential
 
 # function to return the workspace ID
 def get_workspace_id(workspace_name, token_credential):
