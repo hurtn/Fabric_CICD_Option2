@@ -17,7 +17,7 @@ if (-not $workspaceName -or -not $ptenantid -or -not $pclientid) {
 
 # Authenticate with Azure CLI
 Write-Host "Authenticating with Azure using Service Principal..."
-az login --service-principal -u $AppId -p $Secret --tenant $TenantId
+az login --service-principal -u $pclientid -p $pclientsecret --tenant $ptenantid
 
 if ($?) {
     Write-Host "Azure CLI authentication successful."
