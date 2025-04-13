@@ -26,10 +26,10 @@ def get_workspace_id(p_ws_name, p_token):
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
-        workspaces = response.json().get("value", [])
+        workspaces = response.json()["value"]
         for workspace in workspaces:
-            if workspace.get("displayName") == p_ws_name:
-                return workspace.get("id")
+            if workspace["displayName"] == p_ws_name:
+                return workspace["id"]
             else:
                 return "Error: Workspace not found"
     else:
@@ -55,7 +55,7 @@ token_credential = ClientSecretCredential(client_id=args.azclientid, client_secr
 branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
 ws_name = f'{branch}WorkspaceName'
 print(f'Branch set to {branch}')
-print(f'Workspace set to {ws_name}')
+print(f'Variable group to determine workspace is set to {ws_name}')
 # define workspace name to be deployed to based on value in variable group based on branch name
 workspace_name = os.environ[ws_name.upper()]
 print(f'Obtaining GUID for {workspace_name}')
@@ -67,7 +67,7 @@ token = token_credential.get_token(scope)
 
 lookup_response = get_workspace_id(workspace_name, token)
 if lookup_response.startswith("Error"):
-    errmsg=f"Error detected: {lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'"
+    errmsg=f"{lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'"
     raise ValueError(errmsg)
 else:
     workspace_id = lookup_response
