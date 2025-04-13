@@ -75,7 +75,7 @@ else:
     print(f"Workspace ID for {workspace_name} set to {workspace_id}")
 
 # set repo folder
-repository_directory = os.environ["gitFolder"]
+repository_directory = os.environ["GITFOLDER"]
 
 item_type_in_scope = ["Notebook", "DataPipeline", "Lakehouse","SemanticModel","Report"]
 
