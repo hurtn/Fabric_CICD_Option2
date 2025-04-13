@@ -28,6 +28,7 @@ def get_workspace_id(p_ws_name, p_token):
     if response.status_code == 200:
         workspaces = response.json()["value"]
         for workspace in workspaces:
+            print('comparing '+workspace["displayName"] + ' with '+ p_ws_name )
             if workspace["displayName"] == p_ws_name:
                 return workspace["id"]
             else:
