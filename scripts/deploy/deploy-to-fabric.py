@@ -31,7 +31,7 @@ def get_workspace_id(p_ws_name, p_token):
             if workspace["displayName"] == p_ws_name:
                 return workspace["id"]
             else:
-                return "Error: Workspace not found"
+                return f"Error: Workspace {p_ws_name} could not found."
     else:
         return f"Error: {response.status_code}, {response.text}"
 
