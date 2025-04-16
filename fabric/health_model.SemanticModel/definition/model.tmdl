@@ -13,7 +13,7 @@ annotation PBIDesktopVersion = 2.143.7637.1 (Main)+6a4a6f181a58393a521ebb616c85e
 
 annotation PBI_QueryOrder = ["DatabaseQuery"]
 
-annotation PBI_ProTooling = ["WebModelingEdit"]
+annotation PBI_ProTooling = ["SLL", "WebModelingEdit", "SLL_UpdateDLConnection_SQL"]
 
 ref table health
 
