@@ -1,9 +1,0 @@
-find_replace:
-    - find_value: "63c78d9e-8b77-43ed-ba61-a34eb29a09a6" # lakehouse GUID to be replaced
-      replace_value:
-          dev: "a010d828-e3e7-4260-8c4e-6e26237a68e7"
-          test: "e8a0522f-1ee0-4d3d-bcd5-9b33955b9a9e" # PPE lakehouse GUID
-          prod: "1b14a420-47f2-44e2-a9f7-004bc0f23b7" # PROD lakehouse GUID
-      item_type: "Notebook" # filter on notebook files
-      item_name: [] # filter on specific notebook files
-      file_path:
