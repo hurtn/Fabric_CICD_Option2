@@ -44,6 +44,8 @@ parser = argparse.ArgumentParser(description='Process Azure Pipeline arguments.'
 parser.add_argument('--aztenantid',type=str, help= 'tenant ID')
 parser.add_argument('--azclientid',type=str, help= 'SP client ID')
 parser.add_argument('--azspsecret',type=str, help= 'SP secret')
+parser.add_argument('--targetenv',type=str, help= 'target environment')
+
 parser.add_argument('--items_in_scope',type=str, help= 'Defines the item types to be deployed')
 args = parser.parse_args()
 item_types_in_scope = args.items_in_scope
@@ -53,14 +55,14 @@ print('Obtaining token...')
 token_credential = ClientSecretCredential(client_id=args.azclientid, client_secret=args.azspsecret, tenant_id=args.aztenantid)
 
 # get branch name from build
-branch = os.getenv("BUILD_SOURCEBRANCH").replace("refs/heads/","")
+tgtenv = args.targetenv
 print(f'Branch set to {branch}')
 
-# determine the variable group which stores the workspace name with the naming convention "[branch]WorkspaceName"
-ws_name = f'{branch}WorkspaceName'
+# determine the target workspace using the variable group which stores the target workspace name in a variable with the naming convention "[tgtenv]WorkspaceName"
+ws_name = f'{tgtenv}WorkspaceName'
 print(f'Variable group to determine workspace is set to {ws_name}')
 
-# define workspace name to be deployed to based on value in variable group based on branch name. This variable group is not linked to a Key Vault hence the values can be access through os.environ 
+# define workspace name to be deployed to based on value in variable group based on target environment name. This variable group is not linked to a Key Vault hence the values can be access through os.environ 
 workspace_name = os.environ[ws_name.upper()]
 print(f'Obtaining GUID for {workspace_name}')
 
