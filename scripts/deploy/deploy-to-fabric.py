@@ -56,7 +56,7 @@ token_credential = ClientSecretCredential(client_id=args.azclientid, client_secr
 
 # get branch name from build
 tgtenv = args.target_env
-print(f'Branch set to {branch}')
+print(f'Target envirnment set to {tgtenv}')
 
 # determine the target workspace using the variable group which stores the target workspace name in a variable with the naming convention "[tgtenv]WorkspaceName"
 ws_name = f'{tgtenv}WorkspaceName'
