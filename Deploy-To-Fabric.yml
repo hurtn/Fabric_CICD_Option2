@@ -12,7 +12,7 @@ parameters:
   displayName: Select the environment to deploy to
   type: string
   default: 'dev'
-  values:
+  values:
     - dev
     - test
     - prod
