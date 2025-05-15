@@ -8,6 +8,16 @@ parameters:
   type: string
   default: '["Notebook","DataPipeline","Lakehouse","SemanticModel","Report"]'
 
+- name: target_env
+  displayName: Select the environment to deploy to
+  type: string
+  default: 'dev'
+  values:
+    - dev
+    - test
+    - prod
+
+
 variables:
   # This variable group is linked to Azure Key Vault and secrets contain tenant id, service principal client id, secret
   - group: Fabric_Deployment_Group_S
@@ -37,6 +47,6 @@ stages:
             inputs:
               scriptSource: 'filePath'
               scriptPath: 'scripts/deploy/deploy-to-fabric.py'
-              arguments: '--aztenantid $(aztenantid) --azclientid $(azclientid) --azspsecret $(azspsecret) --items_in_scope ${{ parameters.items_in_scope }}'
+              arguments: '--aztenantid $(aztenantid) --azclientid $(azclientid) --azspsecret $(azspsecret) --items_in_scope ${{ parameters.items_in_scope }} --target_env ${{ parameters.target_env }}'
               #failOnStderr: true 
             displayName: 'Run deployment using fabric-cicd'
