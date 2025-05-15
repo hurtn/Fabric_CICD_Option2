@@ -55,7 +55,7 @@ print('Obtaining token...')
 token_credential = ClientSecretCredential(client_id=args.azclientid, client_secret=args.azspsecret, tenant_id=args.aztenantid)
 
 # get branch name from build
-tgtenv = args.targetenv
+tgtenv = args.target_env
 print(f'Branch set to {branch}')
 
 # determine the target workspace using the variable group which stores the target workspace name in a variable with the naming convention "[tgtenv]WorkspaceName"
