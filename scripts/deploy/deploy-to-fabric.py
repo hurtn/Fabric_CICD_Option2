@@ -44,7 +44,7 @@ parser = argparse.ArgumentParser(description='Process Azure Pipeline arguments.'
 parser.add_argument('--aztenantid',type=str, help= 'tenant ID')
 parser.add_argument('--azclientid',type=str, help= 'SP client ID')
 parser.add_argument('--azspsecret',type=str, help= 'SP secret')
-parser.add_argument('--targetenv',type=str, help= 'target environment')
+parser.add_argument('--target_env',type=str, help= 'target environment')
 
 parser.add_argument('--items_in_scope',type=str, help= 'Defines the item types to be deployed')
 args = parser.parse_args()
