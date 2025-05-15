@@ -54,9 +54,9 @@ item_types_in_scope = args.items_in_scope
 print('Obtaining token...')
 token_credential = ClientSecretCredential(client_id=args.azclientid, client_secret=args.azspsecret, tenant_id=args.aztenantid)
 
-# get branch name from build
+# get target environment name
 tgtenv = args.target_env
-print(f'Target envirnment set to {tgtenv}')
+print(f'Target environment set to {tgtenv}')
 
 # determine the target workspace using the variable group which stores the target workspace name in a variable with the naming convention "[tgtenv]WorkspaceName"
 ws_name = f'{tgtenv}WorkspaceName'
@@ -75,7 +75,7 @@ token = token_credential.get_token(scope)
 # call the workspace ID lookup function
 lookup_response = get_workspace_id(workspace_name, token)
 if lookup_response.startswith("Error"):
-    errmsg=f"{lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to branch name + 'WorkspaceName'"
+    errmsg=f"{lookup_response}. Perhaps workspace name is set incorrectly in the variable group of does not map to environment name + 'WorkspaceName'"
     raise ValueError(errmsg)
 else:
     wks_id = lookup_response
@@ -90,7 +90,7 @@ item_types = args.items_in_scope.strip("[]").split(",")
 # Initialize the FabricWorkspace object with the required parameters
 target_workspace = FabricWorkspace(
     workspace_id=wks_id,
-    environment=branch,
+    environment=tgtenv,
     repository_directory=repository_directory,
     item_type_in_scope=item_types,
     token_credential=token_credential,
