@@ -8,12 +8,12 @@
 # META   },
 # META   "dependencies": {
 # META     "lakehouse": {
-# META       "default_lakehouse": "ec81bbfa-bbcf-4195-8070-19b1d5018f6b",
+# META       "default_lakehouse": "269a07a3-8c18-4d7d-afc6-49a5e8fa637b",
 # META       "default_lakehouse_name": "bronze",
-# META       "default_lakehouse_workspace_id": "e2bfc8e6-c857-465c-a736-6588812ea57b",
+# META       "default_lakehouse_workspace_id": "f0ea88e8-7473-4acc-a9db-8ec1424fcb52",
 # META       "known_lakehouses": [
 # META         {
-# META           "id": "ec81bbfa-bbcf-4195-8070-19b1d5018f6b"
+# META           "id": "269a07a3-8c18-4d7d-afc6-49a5e8fa637b"
 # META         }
 # META       ]
 # META     }
@@ -22,7 +22,7 @@
 
 # CELL ********************
 
-print('hello world2')
+print('hello world3')
 
 # METADATA ********************
 
