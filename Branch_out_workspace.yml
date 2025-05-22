@@ -96,7 +96,7 @@ stages:
             inputs:
               scriptSource: 'filePath'
               scriptPath: 'scripts/branchout/Run_post_activity.py'
-              arguments:  '--FABRIC_TOKEN $(fabrictoken) --NOTEBOOK_WORKSPACE_ID $(NOTEBOOK_WORKSPACE_ID) --NOTEBOOK_ID $(NOTEBOOK_ID) --SOURCE_WORKSPACE ${{ parameters.source_workspace }} --TARGET_WORKSPACE ${{ parameters.target_workspace }}  --TENANT_ID $(TENANT_ID) --CAPACITY_ID ${{ parameters.capacity_id }} --COPY_LAKEHOUSE ${{ parameters.copy_lakehouse_data }} --COPY_WAREHOUSE ${{ parameters.copy_warehouse_data }} --CREATE_SHORTCUTS ${{ parameters.create_lakehouse_shortcuts }} --USER_NAME $(username) --PASSWORD $(password) --CLIENT_ID $(azclientid) --CONNECTIONS_FROM_TO ${{ parameters.connections_from_to }} --WH_VIEWS_ON_LH ${{ parameters.warehouse_views_on_lakehouse }}' 
+              arguments:  '--FABRIC_TOKEN $(fabrictoken) --NOTEBOOK_WORKSPACE_ID $(BRANCHOUT_NOTEBOOK_WORKSPACE_ID) --NOTEBOOK_ID $(BRANCHOUT_NOTEBOOK_ID) --SOURCE_WORKSPACE ${{ parameters.source_workspace }} --TARGET_WORKSPACE ${{ parameters.target_workspace }}  --TENANT_ID $(TENANT_ID) --CAPACITY_ID ${{ parameters.capacity_id }} --COPY_LAKEHOUSE ${{ parameters.copy_lakehouse_data }} --COPY_WAREHOUSE ${{ parameters.copy_warehouse_data }} --CREATE_SHORTCUTS ${{ parameters.create_lakehouse_shortcuts }} --USER_NAME $(username) --PASSWORD $(password) --CLIENT_ID $(azclientid) --CONNECTIONS_FROM_TO ${{ parameters.connections_from_to }} --WH_VIEWS_ON_LH ${{ parameters.warehouse_views_on_lakehouse }}' 
               #failOnStderr: true 
             displayName: 'Invoke Fabric Post Activity Job'
 
