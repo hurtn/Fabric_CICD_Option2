@@ -104,21 +104,21 @@ def lookup_and_initialize_workspace(workspace_name, token, tgtenv, token_credent
 repository_directory = os.environ["GITDIRECTORY"]
 item_types = args.items_in_scope.strip("[]").split(",")
 
-workspace_names = [
-    "moj1_cicd_dev_option2",
-    "moj1_cicd_test_option2",
-    "moj1_cicd_prod_option2"
-]
+workspace_env_pairs = [
+    {"name": "moj1_cicd_dev_option2", "env": "dev"},
+    {"name": "moj1_cicd_test_option2", "env": "test"},
+    {"name": "moj1_cicd_prod_option2", "env": "prod"},
+
 
 # Use ThreadPoolExecutor to run lookups and initializations concurrently
 with ThreadPoolExecutor() as executor:
     futures = []
-    for workspace_name in workspace_names:
+    for pair in workspace_env_pairs:
         future = executor.submit(
             lookup_and_initialize_workspace,
-            workspace_name,
+            pair["name"],,
             token,
-            tgtenv,
+            pair["env"],
             token_credential,
             item_types,
             repository_directory
