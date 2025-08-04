@@ -116,7 +116,7 @@ with ThreadPoolExecutor() as executor:
     for pair in workspace_env_pairs:
         future = executor.submit(
             lookup_and_initialize_workspace,
-            pair["name"],,
+            pair["name"],
             token,
             pair["env"],
             token_credential,
