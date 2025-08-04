@@ -107,7 +107,7 @@ item_types = args.items_in_scope.strip("[]").split(",")
 workspace_env_pairs = [
     {"name": "moj1_cicd_dev_option2", "env": "dev"},
     {"name": "moj1_cicd_test_option2", "env": "test"},
-    {"name": "moj1_cicd_prod_option2", "env": "prod"},
+    {"name": "moj1_cicd_prod_option2", "env": "prod"}]
 
 
 # Use ThreadPoolExecutor to run lookups and initializations concurrently
