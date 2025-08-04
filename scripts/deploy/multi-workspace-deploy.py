@@ -83,7 +83,7 @@ def lookup_and_initialize_workspace(workspace_name, token, tgtenv, token_credent
     print(f"Workspace ID for {workspace_name} set to {wks_id}")
 
     # Initialize the FabricWorkspace
-    workspace = FabricWorkspace(
+    target_workspace = FabricWorkspace(
         workspace_id=wks_id,
         environment=tgtenv,
         repository_directory=repository_directory,
