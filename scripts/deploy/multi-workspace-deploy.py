@@ -38,7 +38,7 @@ def get_workspace_id(p_ws_name, p_token):
         return f"Error: {response.status_code}, {response.text}"
 
 # set log level
-change_log_level("DEBUG")
+#change_log_level("DEBUG")
 
 # parse arguments from yaml pipeline. These are typically secrets from a variable group linked to an Azure Key Vault
 parser = argparse.ArgumentParser(description='Process Azure Pipeline arguments.')
