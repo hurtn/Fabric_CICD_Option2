@@ -1,9 +1,17 @@
 find_replace:
-    - find_value: "72wwbivi2ubejbrtmtaho32b4y-7qgcayrkxz6e3bhoghqmbeowxa" # lakehouse GUID to be replaced
+    - find_value: "72wwbivi2ubejbrtmtaho32b4y-7qgcayrkxz6e3bhoghqmbeowxa.datawarehouse.fabric.microsoft.com" # lakehouse GUID to be replaced
       replace_value:
-          dev: "72wwbivi2ubejbrtmtaho32b4y-qh77hqcoznbujdluphuyvq7b5u.datawarehouse.fabric.microsoft.com"
-          test: "72wwbivi2ubejbrtmtaho32b4y-3gg73fsrsm3uvca5nb3mlrmqlu.datawarehouse.fabric.microsoft.com" # PPE lakehouse GUID
-          prod: "72wwbivi2ubejbrtmtaho32b4y-mcnt4nf7n5aedmkip6ptkcqm2q.datawarehouse.fabric.microsoft.com" # PROD lakehouse GUID
+          dev: "72wwbivi2ubejbrtmtaho32b4y-rrppcr2dlmcurlyxopkqv6szmy.datawarehouse.fabric.microsoft.com"
+          test: "72wwbivi2ubejbrtmtaho32b4y-wzteyi4dsghurewho7ft6t63su.datawarehouse.fabric.microsoft.com" # PPE lakehouse GUID
+          prod: "72wwbivi2ubejbrtmtaho32b4y-s2iijiz7xldexeslzf34jhbq2i.datawarehouse.fabric.microsoft.com" # PROD lakehouse GUID
       item_type: "SemanticModel" # filter on notebook files
       item_name: [] # filter on specific notebook files
       file_path: "health_model.SemanticModel/definition/expressions.tmdl"
+    - find_value: "acff9f42-34f1-4c02-903b-83d782ef5bfc" # lakehouse GUID to be replaced
+      replace_value:
+          dev: "5503e6d2-af8c-4b7c-be34-198a9a747284"
+          test: "01ef8352-5b1c-4ff9-b6a9-90c42185ef09" # PPE lakehouse GUID
+          prod: "fa06b754-b3f8-46e4-88ac-68891a73ec87" # PROD lakehouse GUID
+      item_type: "SemanticModel" # filter on notebook files
+      item_name: [] # filter on specific notebook files
+      file_path: "health_model.SemanticModel/definition/expressions.tmdl"      
