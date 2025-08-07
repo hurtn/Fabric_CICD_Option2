@@ -104,58 +104,16 @@ def lookup_and_initialize_workspace(workspace_name, token, tgtenv, token_credent
 repository_directory = os.environ["GITDIRECTORY"]
 item_types = args.items_in_scope.strip("[]").split(",")
 
-workspace_env_pairs = [
-    {"name": "cicd_scale_dev_option1", "env": "dev"},
-    {"name": "cicd_scale_dev_option2", "env": "test"},
-    {"name": "cicd_scale_dev_option3", "env": "prod"},
-    {"name": "cicd_scale_dev_option4", "env": "dev"},
-    {"name": "cicd_scale_dev_option5", "env": "test"},
-    {"name": "cicd_scale_dev_option6", "env": "prod"},
-    {"name": "cicd_scale_dev_option7", "env": "dev"},
-    {"name": "cicd_scale_dev_option8", "env": "test"},
-    {"name": "cicd_scale_dev_option9", "env": "prod"},
-    {"name": "cicd_scale_dev_option10", "env": "dev"},
-    {"name": "cicd_scale_dev_option11", "env": "test"},
-    {"name": "cicd_scale_dev_option12", "env": "prod"},
-    {"name": "cicd_scale_dev_option13", "env": "dev"},
-    {"name": "cicd_scale_dev_option14", "env": "test"},
-    {"name": "cicd_scale_dev_option15", "env": "prod"},
-    {"name": "cicd_scale_dev_option16", "env": "dev"},
-    {"name": "cicd_scale_dev_option17", "env": "test"},
-    {"name": "cicd_scale_dev_option18", "env": "prod"},
-    {"name": "cicd_scale_dev_option19", "env": "dev"},
-    {"name": "cicd_scale_dev_option20", "env": "test"},
-    {"name": "cicd_scale_dev_option21", "env": "prod"},
-    {"name": "cicd_scale_dev_option22", "env": "dev"},
-    {"name": "cicd_scale_dev_option23", "env": "test"},
-    {"name": "cicd_scale_dev_option24", "env": "prod"},
-    {"name": "cicd_scale_dev_option25", "env": "dev"},
-    {"name": "cicd_scale_dev_option26", "env": "test"},
-    {"name": "cicd_scale_dev_option27", "env": "prod"},
-    {"name": "cicd_scale_dev_option28", "env": "dev"},
-    {"name": "cicd_scale_dev_option29", "env": "test"},
-    {"name": "cicd_scale_dev_option30", "env": "prod"},
-    {"name": "cicd_scale_dev_option31", "env": "dev"},
-    {"name": "cicd_scale_dev_option32", "env": "test"},
-    {"name": "cicd_scale_dev_option33", "env": "prod"},
-    {"name": "cicd_scale_dev_option34", "env": "dev"},
-    {"name": "cicd_scale_dev_option35", "env": "test"},
-    {"name": "cicd_scale_dev_option36", "env": "prod"},
-    {"name": "cicd_scale_dev_option37", "env": "dev"},
-    {"name": "cicd_scale_dev_option38", "env": "test"},
-    {"name": "cicd_scale_dev_option39", "env": "prod"},
-    {"name": "cicd_scale_dev_option40", "env": "dev"},
-    {"name": "cicd_scale_dev_option41", "env": "test"},
-    {"name": "cicd_scale_dev_option42", "env": "prod"},
-    {"name": "cicd_scale_dev_option43", "env": "dev"},
-    {"name": "cicd_scale_dev_option44", "env": "test"},
-    {"name": "cicd_scale_dev_option45", "env": "prod"},
-    {"name": "cicd_scale_dev_option46", "env": "dev"},
-    {"name": "cicd_scale_dev_option47", "env": "test"},
-    {"name": "cicd_scale_dev_option48", "env": "prod"},
-    {"name": "cicd_scale_dev_option49", "env": "dev"},
-    {"name": "cicd_scale_dev_option50", "env": "test"}
-]
+
+workspace_env_pairs = []
+
+env_cycle = ["dev", "test", "prod"]
+
+for i in range(1, 101):
+    workspace_env_pairs.append({
+        "name": f"cicd_scale_lg_dev_option{i}",
+        "env": env_cycle[(i - 1) % len(env_cycle)]
+    })
 
 
 
